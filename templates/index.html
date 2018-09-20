@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dojo Survey</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <style>
+        body{
+            margin: 0 auto;
+        }
+        p{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Dojo Survery with Validation</h1>
+        <div class="errors">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p>{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        <form action='/result' method='post'>
+            Your Name:
+            <input type="text" name="name" value="{{ session['name'] }}">
+            <br>Dojo: <select name="dojo">
+                <option value="San Jose">San Jose</option>
+                <option value="Seattle">Seattle</option>
+                <option value="San Francisco">San Francisco</option>
+                <option value="Los Angeles">Los Angeles</option>
+                <option value="Dallas">Dallas</option>
+            </select>
+            <br>Favorite Language: <select name="language">
+                <option value="Python">Python</option>
+                <option value="Java">Java</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="C">C</option>
+            </select>
+            <br>Comment: 
+            <br><textarea name="comment" rows="5" cols="50">{{ session['comment'] }}</textarea>
+            <br><input type='submit' value='Submit'>
+        </form>
+    </div>
+</body>
+</html>
